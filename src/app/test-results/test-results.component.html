@@ -1,0 +1,17 @@
+<mat-card class="test-results-card">
+    <mat-card-title>📜 Test History</mat-card-title>
+    <mat-divider class="my-3"></mat-divider>
+  
+    <div *ngIf="logs.length === 0" class="text-muted">
+      Пока нет запусков тестов.
+    </div>
+  
+    <div *ngFor="let log of logs" class="log-entry">
+      <mat-icon color="primary">{{ log.result.includes('✅') ? 'check_circle' : 'error' }}</mat-icon>
+      <div class="log-info">
+        <div><strong>{{ log.testType }}</strong> — {{ log.result }}</div>
+        <div class="text-muted" style="font-size: 12px;">{{ log.url }} — {{ log.timestamp }}</div>
+      </div>
+    </div>
+  </mat-card>
+  

@@ -1,0 +1,31 @@
+<mat-card class="test-control-card">
+    <mat-card-title>🧪 Run Automated Test</mat-card-title>
+    <mat-card-subtitle>Введите URL и выберите тип теста</mat-card-subtitle>
+  
+    <mat-divider class="my-3"></mat-divider>
+  
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Enter URL</mat-label>
+      <input matInput [(ngModel)]="url" (ngModelChange)="onUrlChange()" placeholder="https://example.com" />
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" style="width: 100%;" *ngIf="availableTestTypes.length > 0">
+      <mat-label>Select Test Type</mat-label>
+      <mat-select [(ngModel)]="testType">
+        <mat-option *ngFor="let t of availableTestTypes" [value]="t">
+          {{ t }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <p *ngIf="availableTestTypes.length === 0" style="color: gray;">❗ Нет доступных тестов для данного сайта</p>
+  
+    <div style="margin-top: 16px;">
+      <button mat-raised-button color="primary" (click)="runTest()" [disabled]="!testType">🚀 Run Test</button>
+    </div>
+  
+    <mat-divider class="my-3"></mat-divider>
+  
+    <p *ngIf="status" style="margin-top: 10px; font-weight: 500;">{{ status }}</p>
+  </mat-card>
+  

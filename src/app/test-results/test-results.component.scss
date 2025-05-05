@@ -1,0 +1,22 @@
+.test-results-card {
+    max-width: 700px;
+    margin: 24px auto;
+    padding: 16px;
+  }
+  .my-3 {
+    margin: 16px 0;
+  }
+  .log-entry {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .log-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .text-muted {
+    color: #777;
+  }
+  

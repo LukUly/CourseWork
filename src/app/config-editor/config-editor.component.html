@@ -1,0 +1,64 @@
+<mat-card class="config-editor-card">
+    <mat-card-title>🛠️ Config Editor</mat-card-title>
+    <mat-card-subtitle>Добавьте или измените селекторы для выбранного сайта и теста</mat-card-subtitle>
+  
+    <mat-divider class="my-3"></mat-divider>
+  
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Hostname</mat-label>
+      <input matInput [(ngModel)]="hostname" placeholder="example.com" />
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Test Type</mat-label>
+        <input matInput [(ngModel)]="testType" placeholder="e.g. signup, register" />
+      </mat-form-field>      
+  
+    <mat-divider class="my-3"></mat-divider>
+  
+    <h3 style="margin-bottom: 8px;">🔧 Selectors</h3>
+  
+    <div *ngFor="let field of selectors; let i = index" style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
+      <mat-form-field appearance="fill" style="flex: 1;">
+        <mat-label>Field name</mat-label>
+        <input matInput [(ngModel)]="field.key" placeholder="e.g. username" />
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" style="flex: 2;">
+        <mat-label>CSS Selector</mat-label>
+        <input matInput [(ngModel)]="field.value" placeholder="e.g. input[name='user']" />
+      </mat-form-field>
+  
+      <button mat-icon-button color="warn" (click)="removeField(i)" aria-label="Remove field">
+        ✖
+      </button>
+    </div>
+  
+    <button mat-stroked-button color="primary" (click)="addField()">➕ Add Field</button>
+  
+    <mat-divider class="my-3"></mat-divider>
+  
+    <button mat-raised-button color="accent" (click)="saveConfig()">💾 Save Config</button>
+  
+    <p *ngIf="status" style="margin-top: 16px;">{{ status }}</p>
+  </mat-card>
+  
+  <mat-divider class="my-3"></mat-divider>
+
+<mat-card class="config-list-card">
+  <mat-card-title>📄 Существующие тесты</mat-card-title>
+
+  <div *ngIf="isEmpty(existingConfigs)" class="text-muted">
+    Пока не добавлено ни одного теста.
+  </div>
+
+  <div *ngFor="let host of existingConfigs | keyvalue">
+    <h4 style="margin-bottom: 4px;">🌐 {{ host.key }}</h4>
+    <ul style="margin-top: 0; margin-bottom: 12px;">
+      <li *ngFor="let type of host.value">
+        {{ type }}
+      </li>
+    </ul>
+    <mat-divider></mat-divider>
+  </div>
+</mat-card>
